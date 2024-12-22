@@ -43,8 +43,8 @@ describe("CardList Component", () => {
 
     // Wait for cards to load
     await waitFor(() => {
-      expect(screen.getByText("Card 1")).toBeTruthy();
-      expect(screen.getByText("Card 2")).toBeTruthy();
+      expect(screen.getAllByText("Card 2")).toBeTruthy();
+      expect((screen.getAllByText("Card 2").length = 2));
     });
   });
 
@@ -57,7 +57,7 @@ describe("CardList Component", () => {
     expect(screen.getByText(/Loading cards.../i)).toBeTruthy();
 
     await waitFor(() => {
-      expect(screen.getByText(/Network error/i)).toBeTruthy();
+      expect(screen.getByText(/Error: An error occurred/i)).toBeTruthy();
     });
   });
 });

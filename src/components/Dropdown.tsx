@@ -28,8 +28,10 @@ export default function Dropdown({ onSelect }: DropdownProps) {
         setLoading(false);
       }
     };
-
-    void loadOptions();
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+    (async () => {
+      await loadOptions();
+    })();
   }, []);
 
   if (loading) {
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#374151",
   },
   picker: {
-    color: "#FFFFFF",
+    color: "#374151",
     height: 50,
   },
   loadingText: {

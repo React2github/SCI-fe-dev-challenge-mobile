@@ -1,6 +1,7 @@
 // CardList.tsx
 import React, { useState, useEffect } from "react";
 import {
+  Animated,
   View,
   Text,
   FlatList,
@@ -67,6 +68,28 @@ export default function CardList({ hp = "" }: CardListProps) {
   const [error, setError] = useState<string | null>(null);
   const [sortKey, setSortKey] = useState<keyof CardData>("name");
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const FadeInView = (props: any) => {
+    const fadeAnim = new Animated.Value(0); // Initial value for opacity: 0
+    useEffect(() => {
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 3000,
+        useNativeDriver: true,
+      }).start();
+    }, [fadeAnim]);
+
+    return (
+      <Animated.View // Special animatable View
+        style={{
+          ...props.style,
+          opacity: fadeAnim, // Bind opacity to animated value
+        }}>
+        {props.children}
+      </Animated.View>
+    );
+  };
+
   useEffect(() => {
     const fetchCardData = async () => {
       if (!hp) {
@@ -95,7 +118,10 @@ export default function CardList({ hp = "" }: CardListProps) {
       }
     };
 
-    void fetchCardData();
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    (async () => {
+      await fetchCardData();
+    })();
   }, [hp, sortKey]);
 
   const sortCards = (key: keyof CardData) => {
@@ -149,7 +175,7 @@ export default function CardList({ hp = "" }: CardListProps) {
   }
 
   return (
-    <View style={styles.container}>
+    <FadeInView style={styles.container}>
       <View style={styles.sortButtons}>
         {renderSortButton("Name", "name", "#3B82F6")}
         {renderSortButton("Set", "set", "#10B981")}
@@ -163,7 +189,7 @@ export default function CardList({ hp = "" }: CardListProps) {
         contentContainerStyle={styles.listContent}
         testID="card-list"
       />
-    </View>
+    </FadeInView>
   );
 }
 
