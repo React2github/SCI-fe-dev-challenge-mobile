@@ -53,10 +53,11 @@ export default function Card({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#1F2937",
+    flexDirection: "column",
     borderRadius: 8,
     padding: 8,
     margin: 8,
-    flexDirection: "row",
+    // flexDirection: "row",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -74,11 +75,12 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
-    borderRadius: 8,
+    borderRadius: 4,
   },
   content: {
     flex: 1,
     justifyContent: "center",
+    width: 300,
   },
   title: {
     fontSize: 18,

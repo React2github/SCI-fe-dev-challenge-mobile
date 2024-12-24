@@ -218,6 +218,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   listContent: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
     paddingBottom: 16,
   },
   messageText: {
