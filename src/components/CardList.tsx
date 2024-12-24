@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 
 import Card from "./Card";
@@ -84,7 +85,8 @@ export default function CardList({ hp = "" }: CardListProps) {
         style={{
           ...props.style,
           opacity: fadeAnim, // Bind opacity to animated value
-        }}>
+        }}
+      >
         {props.children}
       </Animated.View>
     );
@@ -153,7 +155,8 @@ export default function CardList({ hp = "" }: CardListProps) {
   if (loading) {
     return (
       <View style={styles.container}>
-        <Text style={styles.messageText}>Loading cards...</Text>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text style={styles.messageText}>Loading</Text>
       </View>
     );
   }
@@ -221,6 +224,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent: "center",
     paddingBottom: 16,
   },
   messageText: {
